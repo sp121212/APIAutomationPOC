@@ -1,13 +1,10 @@
-package testinternal;
+package test;
 
 import java.util.Scanner;
 
 import exp.ApiFrameWorkException;
 
 public class Test {
-	
-	
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter your age:");
@@ -22,7 +19,5 @@ public class Test {
 		
 		scanner.close();
 	}
-	
-	
 	
 }

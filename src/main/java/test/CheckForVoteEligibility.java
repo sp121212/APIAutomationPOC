@@ -1,4 +1,10 @@
-public class Test {
+package test;
+
+import java.util.Scanner;
+
+import exp.ApiFrameWorkException;
+
+public class CheckForVoteEligibility {
 	
 	
 	@SuppressWarnings("resource")

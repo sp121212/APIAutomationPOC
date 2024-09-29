@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 //
 public class CompareTwoListOfListDemo {
-
+//
+	//
 	public static void main(String[] args) {
 
 		List<List<Integer>> act = new ArrayList<List<Integer>>();

@@ -11,16 +11,17 @@ import io.restassured.specification.RequestSpecification;
 public class RestClient {
 
 	private static RequestSpecBuilder specBuilder;
-	private static final String BASEURI = "";
-	private static final String bearerToken = "";
+	private static final String BASEURI = "https://gorest.co.in";
+	private static final String bearerToken = "95a8ce8d61a500d5b9ed7c34fb4cf89eb0448ce1536cc6e9c549f356f6038d61";
 
 	static {
 		specBuilder = new RequestSpecBuilder();
+		specBuilder.addHeader("Authorization", "Bearer " + bearerToken);
 	}
 
-	public void addAuthenticationHeader() {
-		specBuilder.addHeader("Authentication", "Bearer " + bearerToken);
-	}
+//	public static void addAuthenticationHeader() {
+//		specBuilder.addHeader("Authorization", "Bearer " + bearerToken);
+//	}
 
 	private RequestSpecBuilder setRequestContentType(String contentType) {
 
@@ -42,13 +43,13 @@ public class RestClient {
 
 	private RequestSpecification createRequestSpec() {
 		specBuilder.setBaseUri(BASEURI);
-		addAuthenticationHeader();
+//		addAuthenticationHeader();
 		return specBuilder.build();
 	}
 
 	private RequestSpecification createRequestSpec(Map<String, String> headersMap) {
 		specBuilder.setBaseUri(BASEURI);
-		addAuthenticationHeader();
+//		addAuthenticationHeader();
 
 		if (headersMap != null) {
 			specBuilder.addHeaders(headersMap);
@@ -59,7 +60,7 @@ public class RestClient {
 	private RequestSpecification createRequestSpec(Map<String, String> headersMap, Map<String, String> queryParam) {
 		specBuilder.setBaseUri(BASEURI);
 
-		addAuthenticationHeader();
+//		addAuthenticationHeader();
 
 		if (headersMap != null) {
 			specBuilder.addHeaders(headersMap);
@@ -75,7 +76,7 @@ public class RestClient {
 
 	private RequestSpecification createRequestSpec(Object requestBody, String contentType) {
 		specBuilder.setBaseUri(BASEURI);
-		addAuthenticationHeader();
+//		addAuthenticationHeader();
 		setRequestContentType(contentType);
 		if (requestBody != null) {
 			specBuilder.setBody(requestBody);
@@ -87,7 +88,7 @@ public class RestClient {
 			Map<String, String> headersMap) {
 
 		specBuilder.setBasePath(BASEURI);
-		addAuthenticationHeader();
+//		addAuthenticationHeader();
 		setRequestContentType(contentType);
 
 		if (headersMap != null) {
@@ -121,7 +122,7 @@ public class RestClient {
 		return RestAssured.given(createRequestSpec(headersMap)).when().get(serviceURL);
 	}
 
-	public Response get(String serviceURL, Map<String, String> headersMap, Map<String, String> queryParam,
+	public Response get(String serviceURL, Map<String, String> queryParam, Map<String, String> headersMap, 
 			boolean log) {
 
 		if (log) {
@@ -132,9 +133,8 @@ public class RestClient {
 	}
 
 	public Response post(String serviceURL, String contentType, Object requestBody, boolean log) {
-
 		if (log) {
-			return RestAssured.given(createRequestSpec(requestBody, contentType)).when().post(serviceURL);
+			return RestAssured.given(createRequestSpec(requestBody, contentType)).log().all().when().post(serviceURL);
 		}
 
 		return RestAssured.given(createRequestSpec(requestBody, contentType)).when().post(serviceURL);
@@ -144,7 +144,7 @@ public class RestClient {
 			boolean log) {
 
 		if (log) {
-			return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).when().post(serviceURL);
+			return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).log().all().when().post(serviceURL);
 		}
 
 		return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).when().post(serviceURL);
@@ -153,7 +153,7 @@ public class RestClient {
 	public Response put(String serviceURL, String contentType, Object requestBody, boolean log) {
 
 		if (log) {
-			return RestAssured.given(createRequestSpec(requestBody, contentType)).when().put(serviceURL);
+			return RestAssured.given(createRequestSpec(requestBody, contentType)).log().all().when().put(serviceURL);
 		}
 
 		return RestAssured.given(createRequestSpec(requestBody, contentType)).when().put(serviceURL);
@@ -163,7 +163,7 @@ public class RestClient {
 			boolean log) {
 
 		if (log) {
-			return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).when().put(serviceURL);
+			return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).log().all().when().put(serviceURL);
 		}
 
 		return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).when().put(serviceURL);
@@ -172,7 +172,7 @@ public class RestClient {
 	public Response patch(String serviceURL, String contentType, Object requestBody, boolean log) {
 
 		if (log) {
-			return RestAssured.given(createRequestSpec(requestBody, contentType)).when().patch(serviceURL);
+			return RestAssured.given(createRequestSpec(requestBody, contentType)).log().all().when().patch(serviceURL);
 		}
 
 		return RestAssured.given(createRequestSpec(requestBody, contentType)).when().patch(serviceURL);
@@ -182,7 +182,7 @@ public class RestClient {
 			boolean log) {
 
 		if (log) {
-			return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).when().patch(serviceURL);
+			return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).log().all().when().patch(serviceURL);
 		}
 
 		return RestAssured.given(createRequestSpec(requestBody, contentType, headersMap)).when().patch(serviceURL);
@@ -191,7 +191,7 @@ public class RestClient {
 	public Response delete(String serviceURL, boolean log) {
 		
 		if(log) {
-			return RestAssured.given(createRequestSpec()).when().delete(serviceURL);
+			return RestAssured.given(createRequestSpec()).log().all().when().delete(serviceURL);
 		}
 		
 		return RestAssured.given(createRequestSpec()).when().delete(serviceURL);

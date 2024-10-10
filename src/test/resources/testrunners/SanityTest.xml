@@ -4,22 +4,28 @@
 <suite name="API Regression Suite" thread-count="1"
 	parallel="tests" verbose="4">
 
+
+	<listeners>
+		<listener class-name="listeners.ExtentReportListener"/>
+	</listeners>
+
+
 	<test name="Go rest API test">
-	<parameter name="baseURI" value="https://gorest.co.in"></parameter>
+		<parameter name="baseURI" value="https://gorest.co.in"></parameter>
 		<classes>
 			<class name="tests.GetUserTest" />
 		</classes>
 	</test>
-	
+
 	<test name="Circuit API test">
-	<parameter name="baseURI" value="http://ergast.com"></parameter>
+		<parameter name="baseURI" value="http://ergast.com"></parameter>
 		<classes>
 			<class name="tests.CircuitTest" />
 		</classes>
 	</test>
-	
+
 	<test name="ReqRes API test">
-	<parameter name="baseURI" value="https://reqres.in"></parameter>
+		<parameter name="baseURI" value="https://reqres.in"></parameter>
 		<classes>
 			<class name="tests.ReqResTest" />
 		</classes>

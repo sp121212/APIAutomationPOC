@@ -14,8 +14,9 @@ import io.restassured.RestAssured;
 public class BaseTest {
 
 	ConfigurationManager config;
-	Properties prop;
+	protected Properties prop;
 	protected RestClient restClient;
+	protected String baseURI;
 	
 	@Parameters({"baseURI"})
 	@BeforeTest
@@ -23,9 +24,8 @@ public class BaseTest {
 		RestAssured.filters(new AllureRestAssured());
 		config = new ConfigurationManager();
 		prop = config.initProp();
-//		String baseURI = prop.getProperty("baseuri");
-		restClient = new RestClient(prop, baseURI);
-		
+		prop.setProperty("baseuri", baseURI);
+		this.baseURI = prop.getProperty("baseuri");
 	}
 	
 }

@@ -17,6 +17,7 @@ public class RestClient {
 //	private static final String bearerToken = "95a8ce8d61a500d5b9ed7c34fb4cf89eb0448ce1536cc6e9c549f356f6038d61";
 	private Properties prop;
 	private String baseUri;
+	private boolean isBearerTokenAuthorized = false;
 
 	public RestClient(Properties prop, String baseURI) {
 		specBuilder = new RequestSpecBuilder();
@@ -25,7 +26,10 @@ public class RestClient {
 	}
 
 	public void addAuthenticationHeader() {
-		specBuilder.addHeader("Authorization", "Bearer " + prop.getProperty("bearerToken"));
+		if (!isBearerTokenAuthorized) {
+			specBuilder.addHeader("Authorization", "Bearer " + prop.getProperty("bearerToken"));
+			isBearerTokenAuthorized = true;
+		}
 	}
 
 	private RequestSpecBuilder setRequestContentType(String contentType) {

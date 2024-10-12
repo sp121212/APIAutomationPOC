@@ -2,12 +2,13 @@ package tests;
 
 import org.testng.annotations.Test;
 
-import basetest.BaseTest;
+import basetest.BaseCommonTest;
 import pojo.Users;
 import utils.StringSutil;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CreateUserTest extends BaseTest{
+public class CreateUserTest extends BaseCommonTest{
+	
 	
 	
 	@Test

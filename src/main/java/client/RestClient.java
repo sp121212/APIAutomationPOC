@@ -3,6 +3,7 @@ package client;
 import java.util.Map;
 import java.util.Properties;
 
+import consts.APIHttpStatus;
 import exp.ApiFrameWorkException;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -70,16 +71,16 @@ public class RestClient {
 		return specBuilder.build();
 	}
 
-	private RequestSpecification createRequestSpec(Map<String, String> headersMap, Map<String, String> queryParam,boolean inclAuth) {
+	private RequestSpecification createRequestSpec(Map<String, String> headersMap, Map<String, Object> queryParam,boolean inclAuth) {
 		specBuilder.setBaseUri(baseUri);
 
 		if (inclAuth) {
 			addAuthenticationHeader();
 		}
 
-		if (headersMap != null) {
-			specBuilder.addHeaders(headersMap);
-		}
+//		if (headersMap != null) {
+//			specBuilder.addHeaders(headersMap);
+//		}
 
 		if (queryParam != null) {
 			specBuilder.addQueryParams(queryParam);
@@ -95,6 +96,7 @@ public class RestClient {
 			addAuthenticationHeader();
 		}
 		setRequestContentType(contentType);
+		
 		if (requestBody != null) {
 			specBuilder.setBody(requestBody);
 		}
@@ -110,9 +112,9 @@ public class RestClient {
 		}
 		setRequestContentType(contentType);
 
-		if (headersMap != null) {
-			specBuilder.addHeaders(headersMap);
-		}
+//		if (headersMap != null) {
+//			specBuilder.addHeaders(headersMap);
+//		}
 
 		if (requestBody != null) {
 			specBuilder.setBody(requestBody);
@@ -141,8 +143,7 @@ public class RestClient {
 		return RestAssured.given(createRequestSpec(headersMap, inclAuth)).when().get(serviceURL);
 	}
 
-	public Response get(String serviceURL, Map<String, String> queryParam, Map<String, String> headersMap,
-			boolean log, boolean inclAuth) {
+	public Response get(String serviceURL, Map<String, Object> queryParam, Map<String, String> headersMap, boolean log, boolean inclAuth) {
 
 		if (log) {
 			return RestAssured.given(createRequestSpec(headersMap, queryParam, inclAuth)).log().all().when().get(serviceURL);
@@ -218,4 +219,29 @@ public class RestClient {
 
 		return RestAssured.given(createRequestSpec(inclAuth)).when().delete(serviceURL);
 	}
+	
+	
+	//OAuth2 
+	public String getAccessToken(String baseURI,String serviceURL, String grantType, String clientId, String clientSecret) {
+		
+		RestAssured.baseURI=baseURI;
+		
+		String accessToken=RestAssured
+			.given().log().all()
+				.contentType(ContentType.URLENC)
+					.formParam("grant_type", grantType)
+						.formParam("client_id", clientId)
+							.formParam("client_secret", clientSecret)
+			.when()
+				.post(serviceURL)
+			.then().log().all()
+				.assertThat()
+					.statusCode(APIHttpStatus.OK_200.getStatusCode())
+						.extract()
+							.path("access_token");
+		
+		return accessToken;
+	}
+	
+	
 }

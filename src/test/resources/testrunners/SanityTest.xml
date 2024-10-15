@@ -38,4 +38,15 @@
 		</classes>
 	</test>
 
+
+	<test name="Amadeus API test">
+		<parameter name="baseURI" value="https://test.api.amadeus.com"></parameter>
+		<parameter name="grant_type" value="client_credentials"></parameter>
+		<parameter name="clientid" value="JAApsykO1FMCK3ZGePtSBRIykjVGSg9t"></parameter>
+		<parameter name="clientsecret" value="7S77BHmm6yTfHEXS"></parameter>
+		<classes>
+			<class name="tests.AmadeusAPITest" />
+		</classes>
+	</test>
+	
 </suite>

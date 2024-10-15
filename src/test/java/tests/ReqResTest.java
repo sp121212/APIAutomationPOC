@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import basetest.BaseTest;
 import client.RestClient;
+import consts.APIHttpStatus;
 
 public class ReqResTest extends BaseTest {
 
@@ -16,7 +17,7 @@ public class ReqResTest extends BaseTest {
 	@Test
 	public void getUserTest() {
 		
-		restClient.get("/api/users/2", true, false).then().assertThat().statusCode(200);
+		restClient.get(REQRES_ENDPOINT+"/2", true, false).then().assertThat().statusCode(APIHttpStatus.OK_200.getStatusCode());
 	}
 	
 }

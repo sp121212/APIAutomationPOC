@@ -1,39 +1,44 @@
 package tests;
 
 import org.testng.annotations.Test;
-import basetest.BaseTest;
+
+import basetest.BaseCommonTest;
+import consts.APIHttpStatus;
+
 import static org.hamcrest.Matchers.equalTo;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetUserTest extends BaseTest{
+public class GetUserTest extends BaseCommonTest{
 	
 	
 	@Test
 	public void getAllUsersTest() {
-		restClient.get("/public/v2/users", true, true)
-			.then().log().all().assertThat().statusCode(200);
+		restClient.get(GOREST_ENDPOINT, true, true)
+		.then().log().all()
+		.assertThat().statusCode(APIHttpStatus.OK_200.getStatusCode());
 	}
 	
 	
-//	@Test
-//	public void getUserTest() {
-//		restClient.get("/public/v2/users/7450565", true)
-//			.then().log().all().assertThat()
-//				.statusCode(200)
-//					.and().body("id", equalTo(7450565));
-//	}
-//	
-//	@Test
-//	public void getUserWithQueryParamsTest() {
-//		
-//		Map<String,String> queryParams=new HashMap<String, String>();
-//		queryParams.put("gender", "female");
-//		queryParams.put("status", "inactive");
-//		
-//		restClient.get("/public/v2/users",queryParams,null, true)
-//			.then().log().all().assertThat()
-//				.statusCode(200);
-//	}
+	@Test
+	public void getUserTest() {
+		restClient.get(GOREST_ENDPOINT + "/7466359", true,true)
+			.then().log().all()
+				.assertThat().statusCode(APIHttpStatus.OK_200.getStatusCode())
+					.and().body("id", equalTo(7466359));
+	}
+	
+	@Test
+	public void getUserWithQueryParamsTest() {
+		
+		Map<String, Object> queryParams=new HashMap<String, Object>();
+		queryParams.put("gender", "female");
+		queryParams.put("status", "inactive");
+		
+		restClient.get(GOREST_ENDPOINT ,queryParams,null, true, true)
+		.then().log().all()
+			.assertThat()
+				.statusCode(APIHttpStatus.OK_200.getStatusCode());
+	}
 
 }

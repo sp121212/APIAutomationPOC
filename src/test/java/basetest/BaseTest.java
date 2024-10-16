@@ -13,9 +13,16 @@ import io.restassured.RestAssured;
 
 public class BaseTest {
 
+	//Service URL
+	public static final String GOREST_ENDPOINT = "/public/v2/users";
+	public static final String REQRES_ENDPOINT = "/api/users";
+	public static final String CIRCUIT_ENDPOINT  = "/api/f1";
+	public static final String AMADEUS_ENDPOINT  = "/v1/security/oauth2/token";
+	public static final String AMADEUS_FLIGHTBOOKING_ENDPOINT  ="v1/shopping/flight-destinations";
 	ConfigurationManager config;
-	Properties prop;
+	protected Properties prop;
 	protected RestClient restClient;
+	protected String baseURI;
 	
 	@Parameters({"baseURI"})
 	@BeforeTest
@@ -23,9 +30,8 @@ public class BaseTest {
 		RestAssured.filters(new AllureRestAssured());
 		config = new ConfigurationManager();
 		prop = config.initProp();
-//		String baseURI = prop.getProperty("baseuri");
-		restClient = new RestClient(prop, baseURI);
-		
+		prop.setProperty("baseuri", baseURI);
+		this.baseURI = prop.getProperty("baseuri");
 	}
 	
 }

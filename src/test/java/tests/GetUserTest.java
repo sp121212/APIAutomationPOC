@@ -20,12 +20,12 @@ public class GetUserTest extends BaseCommonTest{
 	}
 	
 	
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void getUserTest() {
-		restClient.get(GOREST_ENDPOINT + "/7466359", true,true)
+		restClient.get(GOREST_ENDPOINT + "/7476157", true,true)
 			.then().log().all()
 				.assertThat().statusCode(APIHttpStatus.OK_200.getStatusCode())
-					.and().body("id", equalTo(7466359));
+					.and().body("id", equalTo(7476157));
 	}
 	
 	@Test

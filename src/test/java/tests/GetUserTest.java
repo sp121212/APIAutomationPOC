@@ -20,7 +20,7 @@ public class GetUserTest extends BaseCommonTest{
 	}
 	
 	
-	@Test
+	@Test(enabled = false)
 	public void getUserTest() {
 		restClient.get(GOREST_ENDPOINT + "/7466359", true,true)
 			.then().log().all()

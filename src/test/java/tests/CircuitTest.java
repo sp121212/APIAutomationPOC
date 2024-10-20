@@ -20,7 +20,6 @@ public class CircuitTest extends BaseTest {
 		restClient=new RestClient(prop, baseURI);
 	}
 	
-	
 	@Test
 	public void getCircuitDetailsTest() {
 	Response circuitResponse =	restClient.get(CIRCUIT_ENDPOINT+ "/2017/circuits.json" , true, false);

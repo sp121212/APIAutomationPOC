@@ -30,7 +30,7 @@ pipeline {
             }
          }
       }
-      stage('Publish Allure Reports') {
+      stage('Publish Allure Reports QA') {
          steps {
             script {
                allure([
@@ -43,7 +43,7 @@ pipeline {
             }
          }
       }
-      stage('Publish Extent Report') {
+      stage('Publish Extent Report QA') {
          steps {
             publishHTML([allowMissing: false,
             alwaysLinkToLastBuild: false,
@@ -61,7 +61,7 @@ pipeline {
          }
       }
       
-      stage('Regression API Automation Tests') {
+      stage('Regression API Automation Tests STAGE') {
          steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                git 'https://github.com/sp121212/APIAutomationPOC.git'
@@ -69,7 +69,7 @@ pipeline {
             }
          }
       }
-      stage('Publish Extent Report') {
+      stage('Publish Extent Report STAGE') {
          steps {
             publishHTML([allowMissing: false,
             alwaysLinkToLastBuild: false,

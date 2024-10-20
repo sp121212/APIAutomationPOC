@@ -14,6 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<extentreport-version>5.1.2</extentreport-version>
+		<aspectj.version>1.9.19</aspectj.version>
 	</properties>
 
 	<dependencies>
@@ -97,7 +98,11 @@
 			<artifactId>json-schema-validator</artifactId>
 			<version>5.5.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
 
 	</dependencies>
 
@@ -123,6 +128,9 @@
 						<suiteXmlFile>
 							src/test/resources/testrunners/SanityTest.xml</suiteXmlFile>
 					</suiteXmlFiles>
+					<argLine>
+						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+					</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

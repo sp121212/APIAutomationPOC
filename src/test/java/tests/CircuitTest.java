@@ -10,7 +10,6 @@ import basetest.BaseTest;
 import client.RestClient;
 import consts.APIHttpStatus;
 import elements.CircuitAPI;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import utils.JSONPathValidator;
 

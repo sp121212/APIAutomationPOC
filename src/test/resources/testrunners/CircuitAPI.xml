@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API Regression Suite" thread-count="1"
+	parallel="tests" verbose="2">
+
+
+	<listeners>
+		<listener class-name="listeners.ExtentReportListener"/>
+	</listeners>
+
+
+
+
+	<test name="Circuit API test">
+		<parameter name="baseURI" value="http://ergast.com"></parameter>
+		<classes>
+			<class name="tests.CircuitTest" />
+		</classes>
+	</test>
+
+
+	
+</suite>

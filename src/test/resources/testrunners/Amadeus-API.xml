@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API Regression Suite" thread-count="1"
+	parallel="tests" verbose="2">
+
+
+	<listeners>
+		<listener class-name="listeners.ExtentReportListener"/>
+	</listeners>
+
+	<test name="Amadeus API test">
+		<parameter name="baseURI" value="https://test.api.amadeus.com"></parameter>
+		<parameter name="grant_type" value="client_credentials"></parameter>
+		<parameter name="clientid" value="JAApsykO1FMCK3ZGePtSBRIykjVGSg9t"></parameter>
+		<parameter name="clientsecret" value="7S77BHmm6yTfHEXS"></parameter>
+		<classes>
+			<class name="tests.AmadeusAPITest" />
+		</classes>
+	</test>
+	
+</suite>

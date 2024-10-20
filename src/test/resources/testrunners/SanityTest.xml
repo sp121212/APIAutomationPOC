@@ -1,1 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API Regression Suite" thread-count="1"
+	parallel="tests" verbose="2">
+
+
+	<listeners>
+		<listener class-name="listeners.ExtentReportListener"/>
+	</listeners>
+
+
+	<test name="Go rest API test Get User">
+		<parameter name="baseURI" value="https://gorest.co.in"></parameter>
+		<classes>
+			<class name="tests.GetUserTest" />
+		</classes>
+	</test>
+	
+	<test name="Go rest API test Create User">
+		<parameter name="baseURI" value="https://gorest.co.in"></parameter>
+		<classes>
+			<class name="tests.CreateUserTest" />
+		</classes>
+	</test>
+
+	<test name="Circuit API test">
+		<parameter name="baseURI" value="http://ergast.com"></parameter>
+		<classes>
+			<class name="tests.CircuitTest" />
+		</classes>
+	</test>
+
+	<test name="ReqRes API test">
+		<parameter name="baseURI" value="https://reqres.in"></parameter>
+		<classes>
+			<class name="tests.ReqResTest" />
+		</classes>
+	</test>
+
+
+	<test name="Amadeus API test">
+		<parameter name="baseURI" value="https://test.api.amadeus.com"></parameter>
+		<parameter name="grant_type" value="client_credentials"></parameter>
+		<parameter name="clientid" value="JAApsykO1FMCK3ZGePtSBRIykjVGSg9t"></parameter>
+		<parameter name="clientsecret" value="7S77BHmm6yTfHEXS"></parameter>
+		<classes>
+			<class name="tests.AmadeusAPITest" />
+		</classes>
+	</test>
+	
+</suite>

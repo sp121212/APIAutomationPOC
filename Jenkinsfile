@@ -4,7 +4,7 @@ pipeline {
       maven 'maven'
    }
    environment{
-       BUILD_NO= ${BUILD_NUMBER}
+       BUILD_NO = "${BUILD_NUMBER}"
        }
 
    

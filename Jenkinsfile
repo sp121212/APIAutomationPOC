@@ -3,6 +3,12 @@ pipeline {
    tools {
       maven 'maven'
    }
+   environment{
+       BUILD_NO= ${BUILD_NUMBER}
+       }
+
+   
+
    stages {
       stage('Developer Build') {
          steps {
@@ -19,14 +25,14 @@ pipeline {
    
       stage("Deploy to QA") {
          steps {
-            echo("deploy to qa")
+            echo("deploy to qa !!!!!!!!!!!!!!!!")
          }
       }
       
       stage('Run Tests with - Docker Images') {
          steps {
            script{
-           def exitCode = sh(script: "docker run --name apitest${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=/src/test/resources/testrunners/SanityTest.xml'")
+           def exitCode = sh(script: "docker run --name apitest${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=/src/test/resources/testrunners/SanityTest.xml' santanu1212/apitests:latest", returnStatus: true )
            	if(exitCode != 0){
            		currentBuild.result = 'FAILURE' //Mark your build as failed if test fail
            	}

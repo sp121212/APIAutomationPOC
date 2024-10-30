@@ -32,7 +32,7 @@ pipeline {
       stage('Run Tests with - Docker Images') {
          steps {
            script{
-           def exitCode = sh(script: "docker run --name apitest${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=/src/test/resources/testrunners/SanityTest.xml' santanu1212/apitests:latest", returnStatus: true )
+           def exitCode = sh(script: "docker run --name apitest${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=/src/test/resources/testrunners/SanityTest.xml' santanu1212/test_v1:latest", returnStatus: true )
            	if(exitCode != 0){
            		currentBuild.result = 'FAILURE' //Mark your build as failed if test fail
            	}

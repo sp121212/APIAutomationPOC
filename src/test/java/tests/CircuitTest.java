@@ -12,7 +12,7 @@ import consts.APIHttpStatus;
 import elements.CircuitAPI;
 import io.restassured.response.Response;
 import utils.JSONPathValidator;
-
+//
 public class CircuitTest extends BaseTest {
 	
 	@BeforeMethod

@@ -8,7 +8,7 @@ WORKDIR /app
 COPY pom.xml .
 
 # Copy all source code, including src/main, src/test, and resources
-COPY src /app/src
+COPY src ./src
 #Switch the directory containing the pom.xml
 WORKDIR /app
 

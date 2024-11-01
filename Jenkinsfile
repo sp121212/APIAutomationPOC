@@ -37,7 +37,7 @@ pipeline {
            	}
            	// Even if the tests fail copy the report 
            	bat "docker start apitest_${BUILD_NUMBER}"
-           	bat "docker cp  apitest_${BUILD_NUMBER}:/app/report/APITestExecutionReport.html ${WORKSPACE}/target"
+           	bat "docker cp  apitest_${BUILD_NUMBER}:/app/reports/APITestExecutionReport.html ${WORKSPACE}/target"
            	bat "docker rm -f apitest_${BUILD_NUMBER}"
            	
            }

@@ -31,7 +31,7 @@ pipeline {
       
       stage('Run Tests with - Docker Images') {
          steps {  	
-           	bat "docker run --name apitest_${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=src/test/resources/testrunners/SanityTest.xml' santanu1212/test10:latest"
+           	bat "docker run --name apitest_${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=src/test/resources/testrunners/SanityTest.xml' santanu1212/test11:latest"
            	// Even if the tests fail copy the report 
            	bat "docker start apitest_${BUILD_NUMBER}"
            	bat "docker cp  apitest_${BUILD_NUMBER}: /app/reports/APITestExecutionReport.html ${WORKSPACE}/reports"

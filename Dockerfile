@@ -6,8 +6,9 @@ WORKDIR /app
 
 #Copy the maven project file into the container
 COPY pom.xml .
-COPY src ./src
 
+# Copy all source code, including src/main, src/test, and resources
+COPY src /app/src
 #Switch the directory containing the pom.xml
 WORKDIR /app
 

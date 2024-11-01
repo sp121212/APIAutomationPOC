@@ -31,7 +31,11 @@ pipeline {
       
       stage('Run Tests with - Docker Images') {
          steps {  	
-           	bat "docker run  -it santanu1212/test13:latest"
+          script{
+           def exitCode = sh(script: "docker run --name apitest_${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=/src/test/resources/testrunners/SanityTest.xml' santanu1212/test10:latest", returnStatus = true )
+           	if(exitCode != 0){
+           		currentBuild.result = 'FAILURE' //Mark your build as failed if test fail
+           	}
            	// Even if the tests fail copy the report 
            	bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/SanityTest.xml"
            	bat "docker start apitest_${BUILD_NUMBER}"
@@ -40,7 +44,7 @@ pipeline {
            	
            }
          }
-      
+      }
       
       stage('Publish Extent Report QA') {
          steps {

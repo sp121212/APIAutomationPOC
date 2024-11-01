@@ -7,7 +7,6 @@ pipeline {
        BUILD_NO = "${BUILD_NUMBER}"
        }
 
-   
 
    stages {
       stage('Developer Build') {

@@ -37,7 +37,6 @@ pipeline {
            		currentBuild.result = 'FAILURE' //Mark your build as failed if test fail
            	}
            	// Even if the tests fail copy the report 
-           	bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/SanityTest.xml"
            	bat "docker start apitest_${BUILD_NUMBER}"
            	bat "docker cp  apitest_${BUILD_NUMBER}: /app/reports/APITestExecutionReport.html ${WORKSPACE}/reports"
            	bat "docker rm -f apitest_${BUILD_NUMBER}"

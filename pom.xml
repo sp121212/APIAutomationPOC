@@ -127,7 +127,7 @@
 					<reuseForks>true</reuseForks>
 					<suiteXmlFiles>
 			<!--	<suiteXmlFile>src/test/resources/testrunners/SanityTest.xml</suiteXmlFile>	-->
-				<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+					<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>

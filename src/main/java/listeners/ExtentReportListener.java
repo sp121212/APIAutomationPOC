@@ -18,7 +18,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class ExtentReportListener implements ITestListener {
 
-	private static final String OUTPUT_FOLDER = "./target/";
+	private static final String OUTPUT_FOLDER = "./report/";
 	private static final String FILE_NAME = "APITestExecutionReport.html";
 
 	private static ExtentReports extent = init();

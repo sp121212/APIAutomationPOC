@@ -3,8 +3,14 @@ pipeline {
    tools {
       maven 'maven'
    }
+   environment{
+       BUILD_NO = "${BUILD_NUMBER}"
+       }
+
+   
+
    stages {
-      stage('Build') {
+      stage('Developer Build') {
          steps {
             git 'https://github.com/jglick/simple-maven-project-with-tests.git'
             bat "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -16,33 +22,30 @@ pipeline {
             }
          }
       }
+   
       stage("Deploy to QA") {
          steps {
-            echo("deploy to qa")
+            echo("deploy to qa !!!!!!!!!!!!!!!! 4")
          }
       }
       
-      stage('Regression API Automation Tests') {
+      stage('Run Tests with - Docker Images') {
          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-               git 'https://github.com/sp121212/APIAutomationPOC.git'
-               bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/SanityTest.xml"
-            }
+           script{
+           def exitCode = bat ("docker run --name apitest_${BUILD_NO} -e MAVEN_OPTS='-Dsurefire.suiteXmlFiles=src/test/resources/testrunners/SanityTest.xml' santanu1212/test_v2:latest", returnStatus: true )
+           				
+           	if(exitCode != 0){
+           		currentBuild.result = 'FAILURE' //Mark your build as failed if test fail
+           	}
+           	// Even if the tests fail copy the report 
+           	bat "docker start apitesting${BUILD_NUMBER}"
+           	bat "docker cp  apitesting${BUILD_NUMBER}: /app/reports/APITestExecutionReport.html ${WORKSPACE}/reports"
+           	bat  "docker rm -f apitesting${BUILD_NUMBER}"
+           	
+           }
          }
       }
-      stage('Publish Allure Reports QA') {
-         steps {
-            script {
-               allure([
-               includeProperties: false,
-               jdk: '',
-               properties: [],
-               reportBuildPolicy: 'ALWAYS',
-               results: [[path: '/allure-results']]
-               ])
-            }
-         }
-      }
+      
       stage('Publish Extent Report QA') {
          steps {
             publishHTML([allowMissing: false,
@@ -54,36 +57,5 @@ pipeline {
             reportTitles: ''])
          }
       }
-      
-      stage("Deploy to Stage") {
-         steps {
-            echo("deploy to stage")
-         }
-      }
-      
-      stage('Regression API Automation Tests STAGE') {
-         steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-               git 'https://github.com/sp121212/APIAutomationPOC.git'
-               bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/Amadeus-API.xml"
-            }
-         }
-      }
-      stage('Publish Extent Report STAGE') {
-         steps {
-            publishHTML([allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: 'reports',
-            reportFiles: 'APITestExecutionReport.html',
-            reportName: 'API HTML Regression Extent Report',
-            reportTitles: ''])
-         }
-      }
-      stage("Deploy to Prod") {
-         steps {
-            echo("deploy to prod")
-         }
-      }
-   }
-}
+ }   
+  }

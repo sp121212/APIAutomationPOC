@@ -39,7 +39,7 @@ pipeline {
            	
            }
          }
-      }
+      
       
       stage('Publish Extent Report QA') {
          steps {
@@ -52,5 +52,6 @@ pipeline {
             reportTitles: ''])
          }
       }
+    }
  }   
   

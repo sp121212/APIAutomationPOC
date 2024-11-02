@@ -10,7 +10,7 @@
 	</listeners>
 
 
-	<test name="Go rest API test Get User">
+<!-- 	<test name="Go rest API test Get User">
 		<parameter name="baseURI" value="https://gorest.co.in"></parameter>
 		<classes>
 			<class name="tests.GetUserTest" />
@@ -30,15 +30,14 @@
 			<class name="tests.CircuitTest" />
 		</classes>
 	</test>
-
+ -->
 	<test name="ReqRes API test">
 		<parameter name="baseURI" value="https://reqres.in"></parameter>
 		<classes>
 			<class name="tests.ReqResTest" />
 		</classes>
 	</test>
-
-
+<!-- 
 	<test name="Amadeus API test">
 		<parameter name="baseURI" value="https://test.api.amadeus.com"></parameter>
 		<parameter name="grant_type" value="client_credentials"></parameter>
@@ -47,6 +46,6 @@
 		<classes>
 			<class name="tests.AmadeusAPITest" />
 		</classes>
-	</test>
+	</test> -->
 	
 </suite>

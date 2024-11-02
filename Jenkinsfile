@@ -24,7 +24,7 @@ pipeline {
    
       stage("Deploy to QA") {
          steps {
-            echo("deploy to qa !!!!!!!!!!!!!!!! 4")
+            echo("deploy to qa !!!!!!!!!!!!!!!! 90")
          }
       }
       
@@ -37,7 +37,7 @@ pipeline {
            	}
            	// Even if the tests fail copy the report 
            	bat "docker start apitest_${BUILD_NUMBER}"
-           	bat "docker cp  apitest_${BUILD_NUMBER}:/app/reports/APITestExecutionReport.html \"${WORKSPACE}/reports\""
+           	bat "docker cp  apitest_${BUILD_NUMBER}:/app/reports/APITestExecutionReport.html \"${WORKSPACE}/reports/APITestExecutionReport.html\""
            	bat "docker rm -f apitest_${BUILD_NUMBER}"
            	
            }
